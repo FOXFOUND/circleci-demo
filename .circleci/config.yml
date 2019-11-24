@@ -31,7 +31,7 @@ jobs:
             #docker cp $DOCKER_CERT_PATH/ca.pem dcert:/dcert_path
             #docker run --volumes-from dcert alpine pwd && ls /
             #docker run --volumes-from dcert -e DOCKER_HOST=$DOCKER_HOST -e DOCKER_TLS_VERIFY=$DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH=/dcert_path dslim/docker-slim --debug build --http-probe=false $IMAGE_NAME
-            docker run -e DOCKER_HOST=$DOCKER_HOST --tls --tls-verify=false --debug build --http-probe=false $IMAGE_NAME
+            docker run -e DOCKER_HOST=$DOCKER_HOST dslim/docker-slim --tls --tls-verify=false --debug build --http-probe=false $IMAGE_NAME
       - run: docker images
       - run: docker volume ls
 
