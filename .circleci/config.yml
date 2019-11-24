@@ -4,19 +4,10 @@ jobs:
     docker:
       - image: docker:18.06.1-ce-git
     environment:
-      TEST_VAR: test_var_value
       IMAGE_NAME: kcq/golang-app
-
     steps:
       - checkout
       - setup_remote_docker
-      - run:
-          name: Check env variables
-          command: printenv
-      - run:
-          name: Check DockerSlim
-          command: |
-            docker run -e DOCKER_HOST=$DOCKER_HOST dslim/docker-slim
       - run: docker images
       - run: docker volume ls
       - run:
