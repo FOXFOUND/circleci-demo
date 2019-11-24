@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-  fmt.Printf("[%v] Golang app (standard)\n",runtime.Version())
+  fmt.Printf("[%v] Golang App (standard)\n",runtime.Version())
 }
