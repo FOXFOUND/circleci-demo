@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:18.06.1-ce-git
+    environment:
+      TEST_VAR: test_var_value
+      IMAGE_NAME: kcq/golang-app
+
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Check env variables
+          command: printenv
+      - run: docker images
+      - run: docker volume ls
+      - run:
+          name: Build Fat image
+          command: |
+            docker build -t $IMAGE_NAME:latest .
+      - run: docker images
+
