@@ -13,6 +13,11 @@ jobs:
       - run:
           name: Check env variables
           command: printenv
+      - run:
+          name: Install DockerSlim
+          command: |
+            wget https://downloads.dockerslim.com/releases/1.26.0/dist_linux.tar.gz && tar xvf dist_linux.tar.gz  && chmod 755 dist_linux/*
+            ./dist_linux/docker-slim version
       - run: docker images
       - run: docker volume ls
       - run:
@@ -20,4 +25,10 @@ jobs:
           command: |
             docker build -t $IMAGE_NAME:latest .
       - run: docker images
+      - run:
+          name: Slim Image
+          command: |
+            ./dist_linux/docker-slim build --http-probe=false $IMAGE_NAME
+      - run: docker images
+      - run: docker volume ls
 
