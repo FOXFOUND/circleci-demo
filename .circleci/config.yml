@@ -27,7 +27,7 @@ jobs:
       - run:
           name: Slim Image
           command: |
-            docker run -e DOCKER_HOST=$DOCKER_HOST dslim/docker-slim --http-probe=false $IMAGE_NAME
+            docker run -e DOCKER_HOST=$DOCKER_HOST dslim/docker-slim build --http-probe=false $IMAGE_NAME
       - run: docker images
       - run: docker volume ls
 
