@@ -29,12 +29,14 @@ jobs:
           command: |
             docker create -v /dcert_path --name dcert alpine:latest /bin/true
             echo $DOCKER_CERT_PATH
+            ls -lh $DOCKER_CERT_PATH
             ls -lh $DOCKER_CERT_PATH/ca.pem
             cat $DOCKER_CERT_PATH/ca.pem
             docker cp $DOCKER_CERT_PATH/ca.pem dcert:/dcert_path
             docker run -it --rm --volumes-from dcert alpine pwd
             docker run -it --rm --volumes-from dcert alpine ls
             docker run --volumes-from dcert alpine cat /dcert_path/ca.pem
+            docker run --volumes-from dcert -e DOCKER_HOST=$DOCKER_HOST -e DOCKER_TLS_VERIFY=$DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH=/dcert_path dslim/docker-slim --debug version
             #docker run --volumes-from dcert alpine pwd && ls /
             #docker run --volumes-from dcert -e DOCKER_HOST=$DOCKER_HOST -e DOCKER_TLS_VERIFY=$DOCKER_TLS_VERIFY -e DOCKER_CERT_PATH=/dcert_path dslim/docker-slim --debug build --http-probe=false $IMAGE_NAME
             #docker run dslim/docker-slim --host=$DOCKER_HOST --tls --tls-verify=false --debug build --http-probe=false $IMAGE_NAME
