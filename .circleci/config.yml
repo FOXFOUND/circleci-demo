@@ -43,5 +43,5 @@ jobs:
             #docker run dslim/docker-slim --host=$DOCKER_HOST --tls --tls-verify=false --debug build --http-probe=false $IMAGE_NAME
       - run: docker images
       - run: docker volume ls
-      - run: docker run -it --rm docker-slim-state:/data alpine ls -lhR /data
+      - run: docker run -it --rm -v docker-slim-state:/data alpine ls -lhR /data
 
