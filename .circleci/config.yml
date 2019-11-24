@@ -28,7 +28,8 @@ jobs:
       - run:
           name: Slim Image
           command: |
-            ./dist_linux/docker-slim build --http-probe=false $IMAGE_NAME
+            ./dist_linux/docker-slim version
+            ./dist_linux/docker-slim --debug build --http-probe=false $IMAGE_NAME
       - run: docker images
       - run: docker volume ls
 
